@@ -24,7 +24,7 @@ pipelineJob('tf-cicd') {
                     branches('*/main')
                 }
             }
-            scriptPath('terraform/pipelines/k8s.jenkins')
+            scriptPath('terraform/pipelines/tf.Jenkinsfile')
         }
     }
 }

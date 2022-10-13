@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-pipelineJob('tf-cicd-akhan') {
+pipelineJob('tf-cicd') {
     displayName('Terraform CI/CD')
 
     logRotator {

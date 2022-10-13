@@ -7,8 +7,9 @@ podTemplate(
             name: 'akhan-demo',
             containers: [
                 containerTemplate(name: 'terraform', image: 'amaankhan4u/ubuntu:latest', command: 'sleep', args: '99d'),
-        ]
-) 
+            ],
+            serviceAccount: 'jenkins-operator-demo',
+        ) 
         
 {
     node(label) {

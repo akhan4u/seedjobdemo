@@ -4,7 +4,7 @@ def label = 'tf-cicd'
 
 podTemplate(
             label: "$label",
-            name: 'akhan-demo',
+            name: 'teikametrics-demo',
             containers: [
                 containerTemplate(name: 'terraform', image: 'atlassian/pipelines-awscli:latest', command: 'sleep', args: '99d'),
             ],

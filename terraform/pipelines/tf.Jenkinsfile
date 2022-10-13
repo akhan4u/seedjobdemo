@@ -6,7 +6,7 @@ podTemplate(
             label: "$label",
             name: 'akhan-demo',
             containers: [
-                containerTemplate(name: 'terraform', image: 'amaankhan4u/ubuntu:latest', command: 'sleep', args: '99d'),
+                containerTemplate(name: 'terraform', image: 'atlassian/pipelines-awscli:latest', command: 'sleep', args: '99d'),
             ],
             serviceAccount: 'jenkins-operator-demo',
         ) 
@@ -15,7 +15,7 @@ podTemplate(
     node(label) {
         stage('Generate terraform plan') {
             container('terraform') {
-                sh 'aws s3 ls'
+                sh 's3 ls'
             }
         }
     }

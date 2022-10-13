@@ -1,9 +1,9 @@
 #!/usr/bin/env groovy
 
-def label1 = "tf-cicd"
+def label = "tf-cicd"
 
 podTemplate(
-            label: label1,
+            label: "$label",
             name: 'akhan-demo',
             containers: [
                 containerTemplate(name: 'terraform', image: 'amaankhan4u/ubuntu:latest', command: 'sleep', args: '99d'),

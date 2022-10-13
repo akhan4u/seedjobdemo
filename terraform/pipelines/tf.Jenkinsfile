@@ -15,7 +15,7 @@ podTemplate(
     node(label) {
         stage('Generate terraform plan') {
             container('terraform') {
-                sh 's3 ls'
+                sh 'aws s3 ls'
             }
         }
     }

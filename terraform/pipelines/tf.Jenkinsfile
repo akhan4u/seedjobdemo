@@ -13,6 +13,27 @@ podTemplate(
 
 {
     node(label) {
+            stage('Setup parameters') {
+            steps {
+                script {
+                    properties([
+                        parameters([
+                            choice(
+                                choices: ['development', 'staging'],
+                                name: 'DEPLOY_STAGE',
+                                description: 'Teikametrics Environment'
+                            ),
+                        parameters([
+                            choice(
+                                choices: ['plan', 'apply'],
+                                name: 'TF_ACTION',
+                                description: 'Terraform Command'
+                            )
+                        ])
+                    ])
+                }
+            }
+        }
         stage('List S3 Bucket') {
             container('terraform') {
                 sh 'aws s3 ls'

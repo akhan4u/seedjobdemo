@@ -8,10 +8,6 @@ pipelineJob('tf-cicd') {
         daysToKeep(30)
     }
 
-    parameters {
-        string description: 'ENV', name: 'DEPLOY_STAGE'
-    }
-
     configure { project ->
         project / 'properties' / 'org.jenkinsci.plugins.workflow.job.properties.DurabilityHintJobProperty' {
             hint('PERFORMANCE_OPTIMIZED')

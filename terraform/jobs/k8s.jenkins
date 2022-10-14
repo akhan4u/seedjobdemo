@@ -4,9 +4,24 @@ pipelineJob('tf-cicd') {
     displayName('Terraform CI/CD')
 
     parameters {
-        booleanParam('FLAG', true)
-        choiceParam('DEPLOY_STAGE', ['option 1 (default)', 'option 2', 'option 3'])
-        choiceParam('TF_ACTION', ['option 1 (default)', 'option 2', 'option 3'])
+        activeChoiceParam('DEPLOY_STAGE') {
+            description('Terraform Deploy Stage')
+            filterable()
+            choiceType('SINGLE_SELECT')
+            groovyScript {
+                script('["development", "staging"]')
+                fallbackScript('"development"')
+            }
+        }
+        activeChoiceParam('TF_ACTION') {
+            description('Terraform Action to perform')
+            filterable()
+            choiceType('SINGLE_SELECT')
+            groovyScript {
+                script('["plan", "apply"]')
+                fallbackScript('"plan"')
+            }
+        }
     }
 
     logRotator {

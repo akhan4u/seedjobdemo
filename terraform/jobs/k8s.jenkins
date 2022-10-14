@@ -8,13 +8,21 @@ pipelineJob('tf-cicd') {
         daysToKeep(30)
     }
 
-    parameters {
-            choice choices: ['staging', 'development'], description: 'Deployment Environment', name: 'DEPLOY_STAGE'
-    }
     configure { project ->
         project / 'properties' / 'org.jenkinsci.plugins.workflow.job.properties.DurabilityHintJobProperty' {
             hint('PERFORMANCE_OPTIMIZED')
         }
+            parameters {
+            string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+
+            text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+
+            booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+
+            choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+
+            password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+            }
     }
 
     definition {

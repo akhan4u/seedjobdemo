@@ -9,7 +9,7 @@ pipelineJob('tf-cicd') {
     }
 
     parameters {
-        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        string description: 'ENV', name: 'DEPLOY_STAGE'
     }
 
     configure { project ->

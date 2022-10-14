@@ -14,11 +14,7 @@ podTemplate(
 {
     node(label) {
         parameters {
-            choice(
-        name: 'DEPLOY_STAGE',
-        choices: "['staging', 'development']",
-        description: 'Deploy stage environment'
-    )
+            choice choices: ['staging', 'development'], description: 'Deployment Environment', name: 'DEPLOY_STAGE'
         }
 
         stage('List S3 Bucket') {

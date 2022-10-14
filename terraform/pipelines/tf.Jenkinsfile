@@ -13,6 +13,7 @@ podTemplate(
 
 {
     node(label) {
+
         stage('List S3 Bucket') {
             container('terraform') {
                 sh 'aws s3 ls'
@@ -24,5 +25,6 @@ podTemplate(
                 }
             }
         }
+
     }
 }

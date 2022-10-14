@@ -5,7 +5,8 @@ pipelineJob('tf-cicd') {
 
     parameters {
         booleanParam('FLAG', true)
-        choiceParam('OPTION', ['option 1 (default)', 'option 2', 'option 3'])
+        choiceParam('DEPLOY_STAGE', ['option 1 (default)', 'option 2', 'option 3'])
+        choiceParam('TF_ACTION', ['option 1 (default)', 'option 2', 'option 3'])
     }
 
     logRotator {

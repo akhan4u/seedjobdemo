@@ -7,6 +7,11 @@ pipelineJob('tf-cicd') {
         numToKeep(10)
         daysToKeep(30)
     }
+    parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        string(name: 'DEPLOY_STAGE', defaultValue: 'staging', description: 'Teikametrics Deployment Environment')
+        string(name: 'TERRAFORM_ACTION', defaultValue: 'plan', description: 'Terraform Deployment Action')
+    }
 
     configure { project ->
         project / 'properties' / 'org.jenkinsci.plugins.workflow.job.properties.DurabilityHintJobProperty' {

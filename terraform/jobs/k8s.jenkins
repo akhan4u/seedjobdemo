@@ -10,7 +10,6 @@ pipelineJob('tf-cicd') {
 
     parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-        string(name: 'TERRAFORM_ACTION', defaultValue: 'plan', description: 'Terraform Deployment Action')
     }
 
     configure { project ->

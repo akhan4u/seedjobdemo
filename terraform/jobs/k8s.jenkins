@@ -4,7 +4,7 @@ pipelineJob('tf-cicd') {
     displayName('Terraform CI/CD')
 
         parameters {
-        choice(defaultValue: '123', description: 'This is a parameter', name: 'PARAMETER01')
+            choice choices: ['staging', 'development'], description: 'Deployment Environment', name: 'DEPLOY_STAGE'
         }
 
     logRotator {

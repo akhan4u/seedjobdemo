@@ -13,10 +13,6 @@ podTemplate(
 
 {
     node(label) {
-        parameters {
-            choice choices: ['staging', 'development'], description: 'Deployment Environment', name: 'DEPLOY_STAGE'
-        }
-
         stage('List S3 Bucket') {
             container('terraform') {
                 sh 'aws s3 ls'

@@ -13,6 +13,9 @@ pipelineJob('tf-cicd') {
             hint('PERFORMANCE_OPTIMIZED')
         }
     }
+            parameters {
+            choice choices: ['staging', 'development'], description: 'Deployment Environment', name: 'DEPLOY_STAGE'
+        }
 
     definition {
         cpsScm {

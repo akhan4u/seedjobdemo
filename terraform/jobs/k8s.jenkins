@@ -4,7 +4,7 @@ pipelineJob('tf-cicd') {
     displayName('Terraform CI/CD')
 
         parameters {
-        toString(defaultValue: '123', description: 'This is a parameter', name: 'PARAMETER01')
+        choice(defaultValue: '123', description: 'This is a parameter', name: 'PARAMETER01')
         }
 
     logRotator {

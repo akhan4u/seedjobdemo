@@ -30,7 +30,7 @@ podTemplate(
             sh 'ENV=$DEPLOY_STAGE'
             sh "TF_CMD=$TF_ACTION"
             sh "GIT_REMOTE_ORIGIN_URL=${git config --get remote.origin.url}"
-            sh 'GIT_REPO=\$(echo \$GIT_REMOTE_ORIGIN_URL | sed 's:.*/::' | sed 's/\.git//')'
+            sh 'GIT_REPO=\$(echo \$GIT_REMOTE_ORIGIN_URL | sed 's#.*/##' | sed 's/\.git//')'
             sh "GIT_REPO_PATH=${git rev-parse --show-prefix}"
             sh "TF_STATE_PATH=$GIT_REPO/$GIT_REPO_PATH"
             sh "echo $ENV $TF_CMD $GIT_REMOTE_ORIGIN_URL $GIT_REPO $GIT_REPO_PATH $TF_STATE_PATH"

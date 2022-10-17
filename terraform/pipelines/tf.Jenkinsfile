@@ -29,7 +29,7 @@ podTemplate(
             container('terraform') {
             sh '''
             ENV="$DEPLOY_STAGE"
-            TF_CMD="$(TF_ACTION)"
+            TF_CMD="$TF_ACTION"
             GIT_REMOTE_ORIGIN_URL="$(git config --get remote.origin.url)"
             GIT_REPO="$(echo "$GIT_REMOTE_ORIGIN_URL" | sed 's:.*/::' | sed 's#\\.git/#')"
             GIT_REPO_PATH="$(git rev-parse --show-prefix)"

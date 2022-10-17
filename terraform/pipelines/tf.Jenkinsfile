@@ -14,8 +14,8 @@ podTemplate(
 {
     node(label) {
         checkout([
-        $class: 'GitSCM', branches: [[name: '*/master']], 
-        extensions: [[$class: 'CloneOption', noTags: false, reference: 'origin', shallow: false]], 
+        $class: 'GitSCM', branches: [[name: '*/master']],
+        extensions: [[$class: 'CloneOption', noTags: false, reference: 'origin', shallow: false]],
         userRemoteConfigs: [[credentialsId: '78fbecd8-0194-4231-9451-127c4ce102da', url: 'git@github.com:teikametrics/tm-infra-shared.git']]]
         )
 
@@ -27,9 +27,13 @@ podTemplate(
         }
         stage('Pull ECR container') {
             container('terraform') {
-                sh '$(aws ecr get-login --no-include-email --region us-east-1)'
-                sh "export ENV=$DEPLOY_STAGE TF_CMD=$TF_ACTION TF_STATE_PATH=devops-delete-me/jenkins-tfstate/"
-                sh 'docker run -it 479870918654.dkr.ecr.us-east-1.amazonaws.com/teikametrics/run-terraform:2.2'
+            sh 'ENV=$DEPLOY_STAGE'
+            sh "TF_CMD=$TF_ACTION"
+            sh "GIT_REMOTE_ORIGIN_URL=${git config --get remote.origin.url}"
+            sh "GIT_REPO=$(echo "$GIT_REMOTE_ORIGIN_URL" | sed 's:.*/::' | sed 's/\.git//')"
+            sh "GIT_REPO_PATH=${git rev-parse --show-prefix}"
+            sh "TF_STATE_PATH=$GIT_REPO/$GIT_REPO_PATH"
+            sh "echo $ENV $TF_CMD $GIT_REMOTE_ORIGIN_URL $GIT_REPO $GIT_REPO_PATH $TF_STATE_PATH"
             }
         }
         stage('list files') {

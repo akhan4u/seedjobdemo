@@ -28,7 +28,7 @@ podTemplate(
         stage('Pull ECR container') {
             container('terraform') {
             sh '''
-            ENV=$(DEPLOY_STAGE)
+            ENV="$DEPLOY_STAGE"
             TF_CMD=$(TF_ACTION)
             GIT_REMOTE_ORIGIN_URL=$(git config --get remote.origin.url)
             GIT_REPO=$(echo "$GIT_REMOTE_ORIGIN_URL" | sed 's:.*/::' | sed 's#\\.git/#')

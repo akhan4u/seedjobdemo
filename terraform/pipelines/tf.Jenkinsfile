@@ -13,10 +13,9 @@ podTemplate(
 
 {
     node(label) {
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'CloneOption', noTags: false, reference: 'origin', shallow: false]], userRemoteConfigs: [[credentialsId: '78fbecd8-0194-4231-9451-127c4ce102da', url: 'git@github.com:teikametrics/tm-infra-shared.git']]])
 
-    checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '78fbecd8-0194-4231-9451-127c4ce102da', url: 'git@github.com:teikametrics/tm-infra-shared.git']]])
-
-        stage('') {
+        stage('List s3 buckets') {
             container('terraform') {
                 sh 'aws s3 ls'
             }
@@ -27,6 +26,5 @@ podTemplate(
                 }
             }
         }
-
     }
 }

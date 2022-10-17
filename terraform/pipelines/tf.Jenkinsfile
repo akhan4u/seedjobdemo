@@ -21,6 +21,7 @@ podTemplate(
 
         stage('list files') {
             container('terraform') {
+                sh 'echo $DEPLOY_STAGE $TF_ACTION'
                 sh 'ls -la'
             }
         }

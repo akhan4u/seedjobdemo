@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def label = 'tf-cicd-${UUID.randomUUID().toString()}'
+def label = 'tf-cicd'
 
 podTemplate(
             label: "$label",

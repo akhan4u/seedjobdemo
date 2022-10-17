@@ -22,7 +22,6 @@ podTemplate(
         stage('list files in repo') {
             container('terraform') {
                 sh 'ls -la'
-                sh 'git remote -v'
                 sh 'env'
             }
         }

@@ -6,7 +6,7 @@ podTemplate(
             label: "$label",
             name: 'teikametrics-demo',
             containers: [
-                containerTemplate(name: 'terraform', image: 'docker.io/teikadev/run-terraform:latest', command: 'sleep', args: '99d'),
+                containerTemplate(name: 'terraform', image: 'docker.io/teikadev/run-terraform:v1', command: 'sleep', args: '99d'),
             ],
             serviceAccount: 'jenkins-operator-demo',
         )
@@ -19,13 +19,13 @@ podTemplate(
         userRemoteConfigs: [[credentialsId: '78fbecd8-0194-4231-9451-127c4ce102da', url: 'git@github.com:teikametrics/tm-infra-shared.git']]]
         )
 
-        stage('list files in repo') {
+        stage('List Files In Repo') {
             container('terraform') {
                 sh 'ls -la'
                 sh 'env'
             }
         }
-        stage('Pull ECR container') {
+        stage('Pull ECR Container') {
             container('terraform') {
             sh '''
             ENV="$DEPLOY_STAGE"
@@ -38,18 +38,13 @@ podTemplate(
             '''
             }
         }
-        stage('list files') {
+        stage('Generate Terraform Plan') {
             container('terraform') {
-                sh 'echo $DEPLOY_STAGE $TF_ACTION'
-                sh 'ls -la'
+                sh 'cd aws/environment-opensearch/'
+                sh 'tf-wrapper'
             }
         }
-        stage('List s3 buckets') {
-            container('terraform') {
-                sh 'aws s3 ls'
-            }
-        }
-        stage('Get authentication information') {
+        stage('Get Authentication Information') {
             container('terraform') {
                 sh 'aws sts get-caller-identity'
             }

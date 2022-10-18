@@ -52,7 +52,6 @@ podTemplate(
                 pwd
                 echo $PWD
                 tf-wrapper
-                sleep 100000
             '''
             }
         }

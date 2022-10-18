@@ -4,7 +4,7 @@ pipelineJob('tf-cicd') {
     displayName('Terraform CI/CD')
 
         parameters {
-        choiceParam('DEPLOY_STAGE', ['development', 'staging', 'production'], 'Target Environment to Deploy to')
+        choiceParam('DEPLOY_STAGE', ['development', 'staging'], 'Target Environment to Deploy to')
         choiceParam('TF_ACTION', ['plan', 'apply'], 'Terraform Action to run')
         }
 

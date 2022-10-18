@@ -47,6 +47,7 @@ podTemplate(
                 GIT_REPO="$(echo "$GIT_REMOTE_ORIGIN_URL" | sed s:.*/:: | sed s/\\.git//)"
                 GIT_REPO_PATH="$(git rev-parse --show-prefix)"
                 export TF_STATE_PATH="$GIT_REPO/$GIT_REPO_PATH"
+                mkdir -p /root/.ssh.mounted
                 cd aws/environment-opensearch/
                 tf-wrapper
             '''

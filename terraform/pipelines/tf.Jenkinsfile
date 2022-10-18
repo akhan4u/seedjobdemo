@@ -43,7 +43,8 @@ podTemplate(
                 sh 'cd aws/environment-opensearch/'
                 sh 'export ENV="$DEPLOY_STAGE"'
                 sh 'export TF_CMD="$TF_ACTION"'
-                sh 'tf-wrapper'
+                sh 'env'
+                sh 'tf-wrapper "$TF_ACTION" "$DEPLOY_STAGE"'
             }
         }
         stage('Get Authentication Information') {

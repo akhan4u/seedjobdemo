@@ -22,7 +22,7 @@ podTemplate(
         stage('List Files In Repo') {
             container('terraform') {
                 sh 'ls -la'
-                sh 'env'
+                sh 'pwd'
             }
         }
         stage('Pull ECR Container') {
@@ -49,6 +49,8 @@ podTemplate(
                 GIT_REPO="$(echo "$GIT_REMOTE_ORIGIN_URL" | sed s:.*/:: | sed s/\\.git//)"
                 GIT_REPO_PATH="$(git rev-parse --show-prefix)"
                 export TF_STATE_PATH="$GIT_REPO/$GIT_REPO_PATH"
+                pwd
+                echo $PWD
                 tf-wrapper
                 sleep 100000
             '''

@@ -41,12 +41,12 @@ podTemplate(
         stage('Generate Terraform Plan') {
             container('terraform') {
             sh '''
-                ENV="$DEPLOY_STAGE"
-                TF_CMD="$TF_ACTION"
+                export ENV="$DEPLOY_STAGE"
+                export TF_CMD="$TF_ACTION"
                 GIT_REMOTE_ORIGIN_URL="$(git config --get remote.origin.url)"
                 GIT_REPO="$(echo "$GIT_REMOTE_ORIGIN_URL" | sed s:.*/:: | sed s/\\.git//)"
                 GIT_REPO_PATH="$(git rev-parse --show-prefix)"
-                TF_STATE_PATH="$GIT_REPO/$GIT_REPO_PATH"
+                export TF_STATE_PATH="$GIT_REPO/$GIT_REPO_PATH"
                 cd aws/environment-opensearch/
                 tf-wrapper
             '''

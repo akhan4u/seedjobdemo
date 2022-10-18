@@ -48,6 +48,7 @@ podTemplate(
                 GIT_REPO_PATH="$(git rev-parse --show-prefix)"
                 export TF_STATE_PATH="$GIT_REPO/$GIT_REPO_PATH"
                 cd aws/environment-opensearch/
+                cat /usr/local/bin/tf-wrapper
                 tf-wrapper
             '''
             }

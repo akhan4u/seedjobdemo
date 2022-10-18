@@ -50,6 +50,7 @@ podTemplate(
                 GIT_REPO_PATH="$(git rev-parse --show-prefix)"
                 export TF_STATE_PATH="$GIT_REPO/$GIT_REPO_PATH"
                 tf-wrapper
+                sleep 100000
             '''
             }
         }

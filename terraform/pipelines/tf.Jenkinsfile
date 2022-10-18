@@ -4,7 +4,7 @@ def label = 'tf-cicd'
 
 podTemplate(
             label: "$label",
-            name: "tf-cicd-$TAG_TIMESTAMP-$BUILD_NUMBER",
+            name: "tf-cicd-$BUILD_NUMBER",
             containers: [
                 containerTemplate(name: 'terraform', image: 'docker.io/teikadev/run-terraform:v1', command: 'sleep', args: '99d', alwaysPullImage: true),
             ],

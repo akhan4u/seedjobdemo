@@ -5,7 +5,7 @@ pipelineJob('tf-cicd') {
 
         parameters {
         choiceParam('DEPLOY_STAGE', ['development', 'staging'], 'Target Environment to Deploy to')
-        choiceParam('TF_ACTION', ['plan', 'apply'], 'Terraform Action to run')
+        choiceParam('TF_ACTION', ['plan', 'console', 'apply'], 'Terraform Action to run')
         }
 
     logRotator {

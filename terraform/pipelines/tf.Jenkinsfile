@@ -6,7 +6,7 @@ podTemplate(
             label: "$label",
             name: 'teikametrics-demo',
             containers: [
-                containerTemplate(name: 'terraform', image: 'docker.io/teikadev/run-terraform:v1', command: 'sleep', args: '99d'),
+                containerTemplate(name: 'terraform', image: 'docker.io/teikadev/run-terraform:v1', command: 'sleep', args: '99d', alwaysPullImage: true),
             ],
             serviceAccount: 'jenkins-operator-demo',
         )

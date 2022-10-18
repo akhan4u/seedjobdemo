@@ -28,23 +28,28 @@ podTemplate(
         stage('Pull ECR Container') {
             container('terraform') {
             sh '''
-            ENV="$DEPLOY_STAGE"
-            TF_CMD="$TF_ACTION"
-            GIT_REMOTE_ORIGIN_URL="$(git config --get remote.origin.url)"
-            GIT_REPO="$(echo "$GIT_REMOTE_ORIGIN_URL" | sed s:.*/:: | sed s/\\.git//)"
-            GIT_REPO_PATH="$(git rev-parse --show-prefix)"
-            TF_STATE_PATH="$GIT_REPO/$GIT_REPO_PATH"
-            echo "$ENV $TF_CMD $GIT_REMOTE_ORIGIN_URL $GIT_REPO $GIT_REPO_PATH $TF_STATE_PATH"
+                ENV="$DEPLOY_STAGE"
+                TF_CMD="$TF_ACTION"
+                GIT_REMOTE_ORIGIN_URL="$(git config --get remote.origin.url)"
+                GIT_REPO="$(echo "$GIT_REMOTE_ORIGIN_URL" | sed s:.*/:: | sed s/\\.git//)"
+                GIT_REPO_PATH="$(git rev-parse --show-prefix)"
+                TF_STATE_PATH="$GIT_REPO/$GIT_REPO_PATH"
+                echo "$ENV $TF_CMD $GIT_REMOTE_ORIGIN_URL $GIT_REPO $GIT_REPO_PATH $TF_STATE_PATH"
             '''
             }
         }
         stage('Generate Terraform Plan') {
             container('terraform') {
-                sh 'cd aws/environment-opensearch/'
-                sh 'export ENV="$DEPLOY_STAGE"'
-                sh 'export TF_CMD="$TF_ACTION"'
-                sh 'env'
-                sh 'export export TF_CMD="$TF_ACTION" ; export ENV="$DEPLOY_STAGE" ; tf-wrapper ; env'
+            sh '''
+                ENV="$DEPLOY_STAGE"
+                TF_CMD="$TF_ACTION"
+                GIT_REMOTE_ORIGIN_URL="$(git config --get remote.origin.url)"
+                GIT_REPO="$(echo "$GIT_REMOTE_ORIGIN_URL" | sed s:.*/:: | sed s/\\.git//)"
+                GIT_REPO_PATH="$(git rev-parse --show-prefix)"
+                TF_STATE_PATH="$GIT_REPO/$GIT_REPO_PATH"
+                cd aws/environment-opensearch/
+                tf-wrapper
+            '''
             }
         }
         stage('Get Authentication Information') {

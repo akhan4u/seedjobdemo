@@ -21,7 +21,6 @@ podTemplate(
 
         stage('List Files In Application Repo') {
             container('terraform') {
-                sh 'ls -la'
                 sh 'echo "The Workspace for the job is $WORKSPACE"'
             }
         }
@@ -29,15 +28,12 @@ podTemplate(
             container('terraform') {
             sh '''
                 cd aws/environment-opensearch/
-                git log -n1 
                 export ENV="$DEPLOY_STAGE"
                 export TF_CMD="$TF_ACTION"
                 GIT_REMOTE_ORIGIN_URL="$(git config --get remote.origin.url)"
                 GIT_REPO="$(echo "$GIT_REMOTE_ORIGIN_URL" | sed s:.*/:: | sed s/\\.git//)"
                 GIT_REPO_PATH="$(git rev-parse --show-prefix)"
                 export TF_STATE_PATH="$GIT_REPO/$GIT_REPO_PATH"
-                pwd
-                echo $PWD
                 tf-wrapper
             '''
             }

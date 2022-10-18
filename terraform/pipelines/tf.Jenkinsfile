@@ -44,7 +44,7 @@ podTemplate(
                 sh 'export ENV="$DEPLOY_STAGE"'
                 sh 'export TF_CMD="$TF_ACTION"'
                 sh 'env'
-                sh 'tf-wrapper "$TF_ACTION" "$DEPLOY_STAGE"'
+                sh 'export export TF_CMD="$TF_ACTION" ; export ENV="$DEPLOY_STAGE" ; tf-wrapper ; env'
             }
         }
         stage('Get Authentication Information') {

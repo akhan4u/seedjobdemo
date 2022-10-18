@@ -42,6 +42,7 @@ podTemplate(
             container('terraform') {
             sh '''
                 cd aws/environment-opensearch/
+                git log -n1 
                 export ENV="$DEPLOY_STAGE"
                 export TF_CMD="$TF_ACTION"
                 GIT_REMOTE_ORIGIN_URL="$(git config --get remote.origin.url)"

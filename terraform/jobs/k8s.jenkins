@@ -29,7 +29,7 @@ pipelineJob('tf-cicd') {
                     branches('*/main')
                 }
             }
-            scriptPath('terraform/pipelines/tf.Jenkinsfile')
+            scriptPath('terraform/pipelines/new.Jenkinsfile')
         }
     }
 }

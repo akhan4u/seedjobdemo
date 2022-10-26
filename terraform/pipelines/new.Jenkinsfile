@@ -1,25 +1,32 @@
 #!/usr/bin/env groovy
-
-def label = 'tf-cicd'
+def label = 'new-pipeline'
 
 podTemplate(
             label: "$label",
-            name: "tf-cicd-$BUILD_NUMBER",
+            name: "new-pipeline-$BUILD_NUMBER",
             containers: [
                 containerTemplate(name: 'terraform', image: 'docker.io/teikadev/run-terraform:v1', command: 'sleep', args: '99d', alwaysPullImage: true),
             ],
             serviceAccount: 'jenkins-operator-demo',
         )
 
-{
-    node(label) {
+pipeline {  
+
+    /*
+     * Run everything on an existing agent configured with a label 'docker'.
+     * This agent will need docker, git and a jdk installed at a minimum.
+     */
+    agent {
+    node(label)
         checkout([
         $class: 'GitSCM', branches: [[name: '*/master']],
         extensions: [[$class: 'CloneOption', noTags: false, reference: 'origin', shallow: false]],
         extensions: [[$class: 'PathRestriction', excludedRegions: '', includedRegions: 'terraform-db-dump-instance/*']],
         userRemoteConfigs: [[credentialsId: '78fbecd8-0194-4231-9451-127c4ce102da', url: 'git@github.com:teikametrics/akhan-testing.git']]]
         )
+    }
 
+    stages {
         stage('List Files In Application Repo') {
             container('terraform') {
                 sh 'echo "The Workspace for the job is $WORKSPACE"'
@@ -38,6 +45,6 @@ podTemplate(
                 tf-wrapper
             '''
             }
-        }
     }
+}
 }

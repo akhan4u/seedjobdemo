@@ -19,6 +19,10 @@ pipelineJob('tf-cicd') {
         }
     }
 
+    triggers {
+        scm('* * * * *')
+    }
+
     definition {
         cpsScm {
             scm {

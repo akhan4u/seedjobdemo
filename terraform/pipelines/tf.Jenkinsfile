@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+//comment
 
 def label = 'tf-cicd'
 

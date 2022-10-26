@@ -17,7 +17,7 @@ podTemplate(
         checkout([
         $class: 'GitSCM', branches: [[name: '*/main']],
         extensions: [[$class: 'CloneOption', noTags: false, reference: 'origin', shallow: false],[$class: 'PathRestriction', excludedRegions: '', includedRegions: 'terraform-db-dump-instance/*']],
-        userRemoteConfigs: [[credentialsId: '78fbecd8-0194-4231-9451-127c4ce102da', url: 'git@github.com:teikametrics/akhan-testing.git']]]
+        userRemoteConfigs: [[credentialsId: '21831901-560a-4450-ab61-a24f0fcd0b54', url: 'git@github.com:teikametrics/akhan-testing.git']]]
         )
 
         stage('List Files In Application Repo') {

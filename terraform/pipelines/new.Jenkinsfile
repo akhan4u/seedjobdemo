@@ -10,23 +10,15 @@ podTemplate(
             serviceAccount: 'jenkins-operator-demo',
         )
 
-pipeline {  
-
-    /*
-     * Run everything on an existing agent configured with a label 'docker'.
-     * This agent will need docker, git and a jdk installed at a minimum.
-     */
-    agent {
-    node(label)
+pipeline {
+    node(label) {
         checkout([
         $class: 'GitSCM', branches: [[name: '*/master']],
         extensions: [[$class: 'CloneOption', noTags: false, reference: 'origin', shallow: false]],
         extensions: [[$class: 'PathRestriction', excludedRegions: '', includedRegions: 'terraform-db-dump-instance/*']],
         userRemoteConfigs: [[credentialsId: '78fbecd8-0194-4231-9451-127c4ce102da', url: 'git@github.com:teikametrics/akhan-testing.git']]]
         )
-    }
 
-    stages {
         stage('List Files In Application Repo') {
             container('terraform') {
                 sh 'echo "The Workspace for the job is $WORKSPACE"'
@@ -45,6 +37,6 @@ pipeline {
                 tf-wrapper
             '''
             }
+        }
     }
-}
 }

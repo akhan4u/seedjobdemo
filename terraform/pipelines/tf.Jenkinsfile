@@ -28,6 +28,7 @@ podTemplate(
         stage('Generate Terraform Plan') {
             container('terraform') {
             sh '''
+                ls -la
                 export ENV="staging"
                 export TF_CMD="plan"
                 GIT_REMOTE_ORIGIN_URL="$(git config --get remote.origin.url)"

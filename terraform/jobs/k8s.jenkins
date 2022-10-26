@@ -3,10 +3,10 @@
 pipelineJob('tf-cicd') {
     displayName('Terraform CI/CD')
 
-        // parameters {
-        // choiceParam('DEPLOY_STAGE', ['development', 'staging'], 'Target Environment to Deploy to')
-        // choiceParam('TF_ACTION', ['plan', 'console', 'apply'], 'Terraform Action to run')
-        // }
+        parameters {
+        choiceParam('DEPLOY_STAGE', ['development', 'staging'], 'Target Environment to Deploy to')
+        choiceParam('TF_ACTION', ['plan', 'console', 'apply'], 'Terraform Action to run')
+        }
 
     logRotator {
         numToKeep(10)

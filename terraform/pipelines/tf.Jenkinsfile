@@ -15,8 +15,7 @@ podTemplate(
     node(label) {
         checkout([
         $class: 'GitSCM', branches: [[name: '*/master']],
-        extensions: [[$class: 'CloneOption', noTags: false, reference: 'origin', shallow: false]],
-        extensions: [[$class: 'PathRestriction', excludedRegions: '', includedRegions: 'terraform-db-dump-instance/*']],
+        extensions: [[$class: 'CloneOption', noTags: false, reference: 'origin', shallow: false],[$class: 'PathRestriction', excludedRegions: '', includedRegions: 'terraform-db-dump-instance/*']],
         userRemoteConfigs: [[credentialsId: '78fbecd8-0194-4231-9451-127c4ce102da', url: 'git@github.com:teikametrics/akhan-testing.git']]]
         )
 

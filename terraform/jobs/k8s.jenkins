@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
-pipelineJob('new-pipeline') {
-    displayName('New Terraform CI/CD')
+pipelineJob('tf-cicd') {
+    displayName('Terraform CI/CD')
 
         parameters {
         choiceParam('DEPLOY_STAGE', ['development', 'staging'], 'Target Environment to Deploy to')
@@ -29,7 +29,7 @@ pipelineJob('new-pipeline') {
                     branches('*/main')
                 }
             }
-            scriptPath('terraform/pipelines/new.Jenkinsfile')
+            scriptPath('terraform/pipelines/tf.Jenkinsfile')
         }
     }
 }

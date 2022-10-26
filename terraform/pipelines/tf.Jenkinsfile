@@ -11,8 +11,6 @@ podTemplate(
             serviceAccount: 'jenkins-operator-demo',
         )
 
-pipeline {
-    triggers { pollSCM '* * * * *' }
     {
     node(label) {
         checkout([
@@ -41,6 +39,5 @@ pipeline {
             '''
             }
         }
-    }
     }
 }

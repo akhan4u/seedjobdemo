@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
-pipelineJob('tf-cicd') {
-    displayName('Terraform CI/CD')
+pipelineJob('new-pipeline') {
+    displayName('New Terraform CI/CD')
 
         parameters {
         choiceParam('DEPLOY_STAGE', ['development', 'staging'], 'Target Environment to Deploy to')
